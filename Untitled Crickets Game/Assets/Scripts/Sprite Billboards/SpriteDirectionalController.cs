@@ -50,4 +50,9 @@ public class SpriteDirectionalController : MonoBehaviour
         animator.SetFloat("moveX", animationDirection.x);
         animator.SetFloat("moveY", animationDirection.y);
     }
+
+    public void SetFrontFacingAngle(float angle)
+    {
+        frontFacingAngle = angle;
+    }
 }
