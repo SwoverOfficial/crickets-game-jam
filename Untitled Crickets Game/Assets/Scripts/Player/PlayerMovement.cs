@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
 
+    [SerializeField] private TeleportPlayer teleportPlayerScript;
+
     public float speed = 12f;
     private float gravity = -9.81f;
     public float gravityScale = 1f;

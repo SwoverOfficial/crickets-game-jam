@@ -12,6 +12,8 @@ public class PickUpController : MonoBehaviour
     public GameObject playerItemSlot;
     public GameObject parentObject;
     public GameObject spriteChildObject;
+
+    private Vector3 originalChildPosition;
     
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,9 @@ public class PickUpController : MonoBehaviour
     {
         if (slotFull)
             return;
+
+        originalChildPosition = spriteChildObject.transform.localPosition;
+        spriteChildObject.transform.localPosition = Vector3.zero;
 
         slotFull = true;
         pickedUp = true;
@@ -51,6 +56,7 @@ public class PickUpController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(Vector3.zero);
         spriteChildObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        spriteChildObject.transform.localPosition = originalChildPosition;
 
         spriteBillboardScript.enabled = true;
     }

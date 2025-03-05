@@ -3,7 +3,6 @@ using UnityEngineInternal;
 
 public class SpriteDirectionalController : MonoBehaviour
 {
-    [Range(0f, 360f)][SerializeField] private float frontFacingAngle = 0f;
     private float backAngle = 65f;
     private float sideAngle = 155f;
     private Transform mainTransform;
@@ -24,21 +23,16 @@ public class SpriteDirectionalController : MonoBehaviour
 
         float signedAngle = Vector3.SignedAngle(mainTransform.forward, camForwardVector, Vector3.up);
 
-        //CALCULATE ANGLE BASED ON ROTATION OF CHARACTER
-        float signedAngleWithRotation = signedAngle + frontFacingAngle;
-        if (signedAngleWithRotation > 180f)
-            signedAngleWithRotation -= 360f;
-
         Vector2 animationDirection = new Vector2(0f, -1f); //Initializes animation angle and defaults it to front animation
 
-        float angle = Mathf.Abs(signedAngleWithRotation);
+        float angle = Mathf.Abs(signedAngle);
 
         //DETERMINING ANIMATION TO PLAY
         if (angle < backAngle)
             animationDirection = new Vector2(0f, -1f); //BACK ANIMATION
         else if (angle < sideAngle)
         {
-            if (signedAngleWithRotation < 0)
+            if (signedAngle < 0)
                 animationDirection = new Vector2(-1f, 0f); //SIDE ANIMATION (LEFT)
             else
                 animationDirection = new Vector2(1f, 0f); //SIDE ANIMATION (RIGHT)
@@ -49,10 +43,5 @@ public class SpriteDirectionalController : MonoBehaviour
         //SETTING ANIMATION
         animator.SetFloat("moveX", animationDirection.x);
         animator.SetFloat("moveY", animationDirection.y);
-    }
-
-    public void SetFrontFacingAngle(float angle)
-    {
-        frontFacingAngle = angle;
     }
 }

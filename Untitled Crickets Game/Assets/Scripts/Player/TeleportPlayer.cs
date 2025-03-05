@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TeleportPlayer : MonoBehaviour
 {
@@ -16,5 +17,10 @@ public class TeleportPlayer : MonoBehaviour
         transform.position = spawnTransform.position;
         transform.rotation = spawnTransform.rotation;
         cc.enabled = true;
+    }
+
+    public void TeleportPlayerToScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
