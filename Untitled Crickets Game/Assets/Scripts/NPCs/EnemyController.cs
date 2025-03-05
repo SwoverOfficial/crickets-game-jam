@@ -46,13 +46,9 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         FieldOfViewCheck();
-        /*RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo, 20f, playerLayer, QueryTriggerInteraction.Ignore))
-            Debug.Log("hit player");
 
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 20, Color.red);*/
-
-
+        if (canSeePlayer)
+            KillPlayer();
 
         if (patrollingPaused)
             return;
