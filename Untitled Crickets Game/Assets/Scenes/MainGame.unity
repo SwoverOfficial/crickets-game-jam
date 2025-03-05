@@ -7054,7 +7054,7 @@ GameObject:
   - component: {fileID: 775825748}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15995,6 +15995,16 @@ MonoBehaviour:
   speed: 7
   waitBeforeLooping: 0
   waitTimeBetweenLoops: 1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  radius: 0
+  angle: 0
+  playerRef: {fileID: 0}
+  canSeePlayer: 0
 --- !u!1 &2016423333
 GameObject:
   m_ObjectHideFlags: 0
