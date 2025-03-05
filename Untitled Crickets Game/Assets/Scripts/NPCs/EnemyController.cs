@@ -19,6 +19,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private LayerMask obstructionMask;
 
     Vector3 targetPosition;
+    public Vector3 direction = Vector3.forward;
+
+    public float degrees;
 
     public float radius;
     [Range(0,360)] public float angle;
@@ -41,9 +44,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        Vector3 direction = Vector3.forward;
-
         if (turnDirections[waypointIndex] == 0)
             direction = new Vector3(0, 0, 1);
         else if (turnDirections[waypointIndex] == 90)
@@ -52,12 +52,18 @@ public class EnemyController : MonoBehaviour
             direction = new Vector3(0, 0, -1);
         else if (turnDirections[waypointIndex] == 270)
             direction = new Vector3(1, 0, 0);
+        
+
+        //transform.localRotation = Quaternion.Euler(0, degrees, 0);
+        //transform.localRotation = turnDirections[waypointIndex] % 180 == 0 ? Quaternion.Euler(0, turnDirections[waypointIndex], 0) : Quaternion.Euler(0, turnDirections[waypointIndex] - 180, 0); ;
 
         RaycastHit hitInfo;
         if (Physics.Raycast(transform.position, transform.TransformDirection(direction), out hitInfo, 20f, playerLayer, QueryTriggerInteraction.Ignore))
             Debug.Log("hit player");
 
         Debug.DrawRay(transform.position, transform.TransformDirection(direction) * 20, Color.red);
+
+
 
         if (patrollingPaused)
             return;
@@ -111,7 +117,7 @@ public class EnemyController : MonoBehaviour
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
-            if (Vector3.Angle(transform.position, directionToTarget) < angle / 2)
+            if (Vector3.Angle(direction, directionToTarget) < angle / 2)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
@@ -126,4 +132,11 @@ public class EnemyController : MonoBehaviour
         else if (canSeePlayer)
             canSeePlayer = false;
     }
+
+    /*RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(direction), out hitInfo, 20f, playerLayer, QueryTriggerInteraction.Ignore))
+            Debug.Log("hit player");
+
+        Debug.DrawRay(transform.position, transform.TransformDirection(direction) * 20, Color.red);
+    */
 }

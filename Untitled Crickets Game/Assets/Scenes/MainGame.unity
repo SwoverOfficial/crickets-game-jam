@@ -2845,7 +2845,7 @@ GameObject:
   - component: {fileID: 344486442}
   - component: {fileID: 344486441}
   - component: {fileID: 344486440}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InteriorWall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3482,7 +3482,7 @@ GameObject:
   - component: {fileID: 415544185}
   - component: {fileID: 415544184}
   - component: {fileID: 415544183}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InteriorWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10354,7 +10354,7 @@ GameObject:
   - component: {fileID: 1319301679}
   - component: {fileID: 1319301678}
   - component: {fileID: 1319301677}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InteriorWall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13981,7 +13981,7 @@ GameObject:
   - component: {fileID: 1794126119}
   - component: {fileID: 1794126118}
   - component: {fileID: 1794126117}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InteriorWall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14086,7 +14086,7 @@ GameObject:
   - component: {fileID: 1802918557}
   - component: {fileID: 1802918556}
   - component: {fileID: 1802918555}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InteriorWall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16000,8 +16000,8 @@ MonoBehaviour:
     m_Bits: 128
   obstructionMask:
     serializedVersion: 2
-    m_Bits: 0
-  radius: 0
+    m_Bits: 256
+  radius: 1.73
   angle: 0
   playerRef: {fileID: 0}
   canSeePlayer: 0
