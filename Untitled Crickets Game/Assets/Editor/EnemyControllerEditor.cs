@@ -10,7 +10,7 @@ public class EnemyControllerEditor : Editor
     {
         EnemyController controller = (EnemyController)target;
         Handles.color = Color.white;
-        Handles.DrawWireArc(controller.transform.position, Vector3.up, controller.direction, 360, controller.radius);
+        Handles.DrawWireArc(controller.transform.position, Vector3.up, Vector3.forward, 360, controller.radius);
 
         Vector3 viewAngle1 = DirectionFromAngle(controller.transform.eulerAngles.y, -controller.angle / 2);
         Vector3 viewAngle2 = DirectionFromAngle(controller.transform.eulerAngles.y, controller.angle / 2);

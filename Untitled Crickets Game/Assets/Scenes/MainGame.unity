@@ -1682,7 +1682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c17e7a77997d5b4478fd9712f322d605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontFacingAngle: 180
 --- !u!114 &181038195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,7 +1989,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c17e7a77997d5b4478fd9712f322d605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontFacingAngle: 90
 --- !u!95 &253985837
 Animator:
   serializedVersion: 5
@@ -7117,6 +7115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  teleportPlayerScript: {fileID: 0}
   speed: 12
   gravityScale: 9
   jumpHeight: 4
@@ -13416,7 +13415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c17e7a77997d5b4478fd9712f322d605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontFacingAngle: 180
 --- !u!95 &1699109477
 Animator:
   serializedVersion: 5
@@ -13640,7 +13638,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c17e7a77997d5b4478fd9712f322d605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontFacingAngle: 180
 --- !u!114 &1709837679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15985,13 +15982,13 @@ MonoBehaviour:
   - {fileID: 1652405523}
   turnDirections:
   - 180
-  - 270
+  - 90
   - 180
-  - 270
+  - 90
   - 0
-  - 90
+  - 270
   - 180
-  - 90
+  - 270
   speed: 7
   waitBeforeLooping: 0
   waitTimeBetweenLoops: 1
@@ -16001,10 +15998,26 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 256
-  radius: 1.73
-  angle: 0
+  degrees: 0
+  radius: 4.91
+  angle: 122
   playerRef: {fileID: 0}
   canSeePlayer: 0
+  onKillPlayer:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 775825748}
+        m_TargetAssemblyTypeName: TeleportPlayer, Assembly-CSharp
+        m_MethodName: TeleportPlayerToArea
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 618292323}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2016423333
 GameObject:
   m_ObjectHideFlags: 0
@@ -16683,7 +16696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c17e7a77997d5b4478fd9712f322d605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontFacingAngle: 0
 --- !u!1 &2123188655
 GameObject:
   m_ObjectHideFlags: 0

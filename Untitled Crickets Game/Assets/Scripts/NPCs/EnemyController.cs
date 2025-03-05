@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyController : MonoBehaviour
 {
@@ -19,7 +20,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private LayerMask obstructionMask;
 
     Vector3 targetPosition;
-    public Vector3 direction = Vector3.forward;
 
     public float degrees;
 
@@ -27,6 +27,8 @@ public class EnemyController : MonoBehaviour
     [Range(0,360)] public float angle;
     public GameObject playerRef;
     public bool canSeePlayer;
+
+    public UnityEvent onKillPlayer;
     
     // Start is called before the first frame update
     void Start()
@@ -36,32 +38,19 @@ public class EnemyController : MonoBehaviour
 
         waypointIndex = 0;
         targetPosition = new Vector3(waypoints[0].position.x, transform.position.y, waypoints[0].position.z);
-        spriteDirectionControllerScript.SetFrontFacingAngle(turnDirections[0]);
 
-        StartCoroutine(FOVRoutine());
+        //StartCoroutine(FOVRoutine());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (turnDirections[waypointIndex] == 0)
-            direction = new Vector3(0, 0, 1);
-        else if (turnDirections[waypointIndex] == 90)
-            direction = new Vector3(-1, 0, 0);
-        else if (turnDirections[waypointIndex] == 180)
-            direction = new Vector3(0, 0, -1);
-        else if (turnDirections[waypointIndex] == 270)
-            direction = new Vector3(1, 0, 0);
-        
-
-        //transform.localRotation = Quaternion.Euler(0, degrees, 0);
-        //transform.localRotation = turnDirections[waypointIndex] % 180 == 0 ? Quaternion.Euler(0, turnDirections[waypointIndex], 0) : Quaternion.Euler(0, turnDirections[waypointIndex] - 180, 0); ;
-
-        RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(direction), out hitInfo, 20f, playerLayer, QueryTriggerInteraction.Ignore))
+        FieldOfViewCheck();
+        /*RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo, 20f, playerLayer, QueryTriggerInteraction.Ignore))
             Debug.Log("hit player");
 
-        Debug.DrawRay(transform.position, transform.TransformDirection(direction) * 20, Color.red);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 20, Color.red);*/
 
 
 
@@ -75,7 +64,7 @@ public class EnemyController : MonoBehaviour
         //MOVEMENT
         targetPosition = new Vector3(waypoints[waypointIndex].position.x, transform.position.y, waypoints[waypointIndex].position.z);
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-        spriteDirectionControllerScript.SetFrontFacingAngle(turnDirections[waypointIndex]);
+        transform.rotation = Quaternion.Euler(0, turnDirections[waypointIndex], 0);
     }
 
     public void NextWaypoint()
@@ -117,7 +106,7 @@ public class EnemyController : MonoBehaviour
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
-            if (Vector3.Angle(direction, directionToTarget) < angle / 2)
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
@@ -133,10 +122,9 @@ public class EnemyController : MonoBehaviour
             canSeePlayer = false;
     }
 
-    /*RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(direction), out hitInfo, 20f, playerLayer, QueryTriggerInteraction.Ignore))
-            Debug.Log("hit player");
-
-        Debug.DrawRay(transform.position, transform.TransformDirection(direction) * 20, Color.red);
-    */
+    public void KillPlayer()
+    {
+        canSeePlayer = false;
+        onKillPlayer.Invoke();
+    }
 }
